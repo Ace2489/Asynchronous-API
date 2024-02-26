@@ -1,19 +1,26 @@
-# Asynchronous-API
-Asynchronous Combined API Endpoint
-Endpoint: /combined
+# Asynchronous Combined API Documentation
 
-Method: GET
+## Overview
 
-Description: This endpoint is used to asynchronously fetch JSON data from multiple URLs and combine the responses into a single JSON response.
+This API endpoint is designed to asynchronously fetch JSON data from multiple URLs and combine the responses into a single JSON response. It utilizes the `aiohttp` library for making asynchronous HTTP requests and `asyncio` for managing asynchronous tasks. The response is returned as a JSON object using Django's `JsonResponse`.
 
-Request Parameters:
+## Endpoint
+
+- **URL:** `/combined`
+- **Method:** `GET`
+
+## Request
+
 This endpoint does not require any request parameters.
 
-Response:
-200 OK: If the JSON data is successfully fetched from all URLs.
+## Response
 
-json
-Copy code
+### Success Response
+
+- **Status Code:** 200 OK
+- **Content-Type:** application/json
+
+```
 {
     "Response": [
         {
@@ -24,22 +31,19 @@ Copy code
         }
     ]
 }
-500 Internal Server Error: If an error occurs during the asynchronous fetch process.
+```
+### Error Response
+ - Status Code: 500 Internal Server Error
+ - Content-Type: application/json
 
-json
-Copy code
+```
 {
     "error": "Internal Server Error"
 }
-Example Usage:
-bash
-Copy code
-curl -X GET http://your-domain.com/combined
-Notes:
-This endpoint asynchronously fetches JSON data from the following URLs:
+```
 
-https://quotable.io/quotes?page=1
-https://randomuser.me/api/
-The JSON data from each URL is included in the response under the keys quotes and results respectively.
-
-The endpoint uses the aiohttp library for asynchronous HTTP requests and asyncio for managing asynchronous tasks.
+## Notes
+- This endpoint asynchronously fetches JSON data from the following URLs:
+    - https://quotable.io/quotes?page=1: Retrieves a list of quotes.
+    - https://randomuser.me/api/: Retrieves random user data.
+- The JSON data from each URL is included in the response under the keys quotes and results respectively.
